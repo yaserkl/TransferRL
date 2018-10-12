@@ -13,7 +13,7 @@ TransferRL
       :target: https://github.com/yaserkl/TransferRL/graphs/contributors
 .. image:: https://img.shields.io/github/issues/Naereen/StrapDown.js.svg
       :target: https://github.com/yaserkl/TransferRL/issues
-.. image:: https://img.shields.io/badge/arXiv-1805.09461-red.svg?style=flat
+.. image:: https://img.shields.io/badge/-red.svg?style=flat
    :target: https://arxiv.org/abs/
 
 This repository contains the code developed in TensorFlow_ for the following paper submitted to SIAM SDM 2019:
@@ -127,5 +127,7 @@ all the training.
 Running Experiments
 ====================
 
-To train our best performing model, please check the following `file <src/helper/commands.txt>`_:
+To train our best performing model, please check the following `file <src/helper/commands.txt>`_
+Also, you can download our best performing model from `here_`
 
+.. _here: https://www.drive.google.com
