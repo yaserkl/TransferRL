@@ -128,6 +128,7 @@ Running Experiments
 ====================
 
 To train our best performing model, please check the following `file <src/helper/commands.txt>`_
-Also, you can download our best performing model from `here_`
+
+Also, you can download our best performing model from here_
 
 .. _here: https://www.drive.google.com
