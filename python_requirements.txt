@@ -1,0 +1,6 @@
+tensorflow-gpu
+PyYAML
+spacy
+scikit-learn
+nltk
+pyrouge

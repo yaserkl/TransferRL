@@ -1,0 +1,182 @@
+========================================================================================
+pre-training for 15 epochs using Newsroom dataset
+========================================================================================
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=48 --max_iter=310625 --example_queue_threads=1 --batch_queue_threads=1
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=8 --example_queue_threads=1 --batch_queue_threads=1
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=8 --rouge_based_eval=True --example_queue_threads=1 --batch_queue_threads=1
+
+********
+Decoding
+********
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=train --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_loss --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_rouge --decode_name=newsroom
+
+<<<<<<DUC DATASET>>>>>>
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2004
+
+
+Zeta clipping at 0.5
+
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=train --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_loss --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_rouge --decode_name=newsroom
+
+<<<<<<DUC DATASET>>>>>>
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2004
+
+
+************
+RL training
+************
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=24 --max_iter=476292 --rl_training=True --eta=1.78851E-06 --convert_to_reinforce_model=True
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=24 --max_iter=476292 --rl_training=True --eta=1.78851E-06 --zeta_clipping=1 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --lr=0.001
+
+CUDA_VISIBLE_DEVICES=1 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=1 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1
+
+CUDA_VISIBLE_DEVICES=1 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=1 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --rouge_based_eval=True
+
+
+ZETA CLIPPING: 0.5
+
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --batch_size=24 --max_iter=476292 --rl_training=True --eta=1.78851E-06 --convert_to_reinforce_model=True
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --batch_size=24 --max_iter=476292 --rl_training=True --eta=1.78851E-06 --zeta_clipping=0.5 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --lr=0.001
+
+CUDA_VISIBLE_DEVICES=3 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=0.5 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1
+
+CUDA_VISIBLE_DEVICES=3 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5 --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=0.5 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --rouge_based_eval=True
+
+
+***********
+Coverage
+***********
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --batch_size=24 --max_iter=559125 --rl_training=True --eta=1.78851E-06 --coverage=True --convert_to_coverage_model=True
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --batch_size=24 --max_iter=559125 --rl_training=True --eta=1.78851E-06 --zeta_clipping=1 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --coverage=True --lr=0.0001
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=1 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --coverage=True
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=1 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --rouge_based_eval=True --coverage=True
+
+
+ZETA CLIPPING: 0.5
+
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --batch_size=24 --max_iter=559125 --rl_training=True --eta=1.78851E-06 --coverage=True --convert_to_coverage_model=True
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=train --train_size=994001 --full_data_path=$HOME/data/newsroom/train.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/train_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --batch_size=24 --max_iter=559125 --rl_training=True --eta=1.78851E-06 --zeta_clipping=0.5 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --lr=0.0001 --coverage=True 
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=0.5 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --coverage=True
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=eval --full_data_path=$HOME/data/newsroom/val.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/val_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --batch_size=8 --rl_training=True --eta=1.78851E-06 --zeta_clipping=0.5 --rl_start_step=310625 --example_queue_threads=1 --batch_queue_threads=1 --rouge_based_eval=True --coverage=True
+
+
+********
+Decoding
+********
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=train --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_loss --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_rouge --decode_name=newsroom
+
+<<<<<<DUC DATASET>>>>>>
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2004
+
+
+ZETA 0.5
+
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=2 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=train --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_loss --decode_name=newsroom
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=cnn
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/cnn_dm/finished_files/chunked/test_* --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=False --decode_from=eval_rouge --decode_name=newsroom
+
+<<<<<<DUC DATASET>>>>>>
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2003/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2003
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=train --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_loss --decode_name=duc2004
+
+CUDA_VISIBLE_DEVICES=0 python src/run_summarization.py --mode=decode --coverage=True --full_data_path=$HOME/data/newsroom/test.bin --partial_data_path=$HOME/data/DUC/clean_2004/test.bin --vocab_path=$HOME/data/newsroom/vocab-50k --log_root=$HOME/working_dir/cnn_dm/generalized/ --exp_name=transferrl_0.5_coverage --single_pass=1 --beam_size=4 --partial_decoding=True --decode_from=eval_rouge --decode_name=duc2004
+
+
