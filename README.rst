@@ -14,7 +14,7 @@ TransferRL
 .. image:: https://img.shields.io/github/issues/Naereen/StrapDown.js.svg
       :target: https://github.com/yaserkl/TransferRL/issues
 .. image:: https://img.shields.io/badge/-red.svg?style=flat
-   :target: https://arxiv.org/abs/
+   :target: https://arxiv.org/abs/1810.06667
 
 This repository contains the code developed in TensorFlow_ for the following paper submitted to SIAM SDM 2019:
 
@@ -23,7 +23,7 @@ This repository contains the code developed in TensorFlow_ for the following pap
 | by: `Yaser Keneshloo`_, `Naren Ramakrishnan`_, and `Chandan K. Reddy`_
 
 
-.. _Deep Transfer Reinforcement Learning for Text Summarization: https://arxiv.org/abs/
+.. _Deep Transfer Reinforcement Learning for Text Summarization: https://arxiv.org/abs/1810.06667
 .. _TensorFlow: https://www.tensorflow.org/
 .. _Yaser Keneshloo: https://github.com/yaserkl
 .. _Naren Ramakrishnan: http://people.cs.vt.edu/naren/
