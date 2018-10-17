@@ -13,7 +13,7 @@ TransferRL
       :target: https://github.com/yaserkl/TransferRL/graphs/contributors
 .. image:: https://img.shields.io/github/issues/Naereen/StrapDown.js.svg
       :target: https://github.com/yaserkl/TransferRL/issues
-.. image:: https://img.shields.io/badge/-red.svg?style=flat
+.. image:: https://img.shields.io/badge/arXiv-1810.06667-red.svg?style=flat
    :target: https://arxiv.org/abs/1810.06667
 
 This repository contains the code developed in TensorFlow_ for the following paper submitted to SIAM SDM 2019:
