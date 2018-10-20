@@ -20,7 +20,6 @@ import sys
 import time
 import os
 import tensorflow as tf
-import numpy as np
 from collections import namedtuple
 from data import Vocab
 from batcher import Batcher
@@ -31,16 +30,11 @@ import numpy as np
 from glob import glob
 from tensorflow.python import debug as tf_debug
 from replay_buffer import ReplayBuffer
-from dqn import DQN
 from threading import Thread
-import pickle
 from tensorflow.python.ops import variable_scope
 from tensorflow.python.ops import array_ops
-from tensorflow.python.ops import nn_ops
-from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import gen_array_ops
 from tensorflow.python.ops import math_ops
-from tensorflow.python.ops.distributions import categorical
 from tensorflow.python.ops.distributions import bernoulli
 
 FLAGS = tf.app.flags.FLAGS

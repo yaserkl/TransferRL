@@ -122,7 +122,6 @@ class Example(object):
       while len(self.enc_input_extend_vocab) < max_len:
         self.enc_input_extend_vocab.append(pad_id)
 
-
 class Batch(object):
   """Class representing a minibatch of train/val/test examples for text summarization."""
 
