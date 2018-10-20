@@ -126,5 +126,6 @@ all the training.
 ====================
 Running Experiments
 ====================
+Download our best-performing model from `here <https://drive.google.com/file/d/1rLKPsRz9RAnyHqjpeYMYkXrRQmXk6N6z/view?usp=sharing>`_.
 
-To train our best performing model, please check the following `file <src/helper/commands.txt>`_
+To train our best performing model or decode using our pre-trained model, please check the following `file <src/helper/commands.txt>`_
