@@ -288,6 +288,11 @@ class SummarizationModel(object):
         self.decoder_outputs, self._dec_out_state, self.attn_dists, self.p_gens, self.coverage,
         self.vocab_scores, self.final_dists, self.samples, self.greedy_search_samples, self.temporal_es,
         self.sampling_rewards, self.greedy_rewards) = self._add_decoder(emb_dec_inputs, embedding)
+      self.final_dists_full = tf.unstack(self.final_dists, axis=1)
+      self.sampling_rewards_full = tf.unstack(self.sampling_rewards, axis=1) \
+        if (FLAGS.use_intermediate_rewards or FLAGS.use_discounted_rewards) else self.sampling_rewards
+      self.greedy_rewards_full = tf.unstack(self.greedy_rewards, axis=1) \
+        if (FLAGS.use_intermediate_rewards or FLAGS.use_discounted_rewards) else self.greedy_rewards
       tf.logging.info('adding decoder took {:0.3f} seconds'.format(time.time()-_t))
       if hps.rl_training and hps.mode in ['train', 'eval']: # separate tensors
         self._hps = self._hps._replace(batch_size=(self._hps.batch_size/2)) # separate the full/partial batches in this mini-batch
